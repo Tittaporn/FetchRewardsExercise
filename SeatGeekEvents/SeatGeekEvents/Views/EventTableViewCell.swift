@@ -8,8 +8,8 @@
 import UIKit
 
 class EventTableViewCell: UITableViewCell {
-
-   // MARK: - Outlets
+    
+    // MARK: - Outlets
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -28,15 +28,18 @@ class EventTableViewCell: UITableViewCell {
     func updateViewCellWith(event: Event) {
         titleLabel.text = event.shortTitle
         locationLabel.text = event.venue.location
-        
         let eventDate = event.date.stringDateToDate()
-        
-        
         dateLabel.text = eventDate.dateToString(format: .dateWithDay)
         timeLabel.text = eventDate.dateToString(format: .time)
         updateImageFor(event: event)
+        if FavoriteEventController.shared.favoriteEvents.contains(event) {
+            favoriteImageView.isHidden = false
+            favoriteImageView.image = UIImage(systemName: "heart.fill")
+        } else {
+            favoriteImageView.isHidden = true
+        }
     }
-
+    
     func updateImageFor(event: Event) {
         guard let imageURL = event.performers.first?.image else {return}
         EventController.fetchImage(with: imageURL) { [weak self] (results) in
@@ -53,5 +56,4 @@ class EventTableViewCell: UITableViewCell {
             }
         }
     }
-    
 }

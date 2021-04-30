@@ -19,6 +19,7 @@
 		160D67A7263B371D00ADE23D /* EventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160D67A6263B371D00ADE23D /* EventController.swift */; };
 		160D67AB263B39B500ADE23D /* EventError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160D67AA263B39B500ADE23D /* EventError.swift */; };
 		16B567DF263BB3510069E993 /* ExtensionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B567DE263BB3510069E993 /* ExtensionHelper.swift */; };
+		16B567E2263BBE2C0069E993 /* FavoriteEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B567E1263BBE2C0069E993 /* FavoriteEventController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		160D67A6263B371D00ADE23D /* EventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventController.swift; sourceTree = "<group>"; };
 		160D67AA263B39B500ADE23D /* EventError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventError.swift; sourceTree = "<group>"; };
 		16B567DE263BB3510069E993 /* ExtensionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionHelper.swift; sourceTree = "<group>"; };
+		16B567E1263BBE2C0069E993 /* FavoriteEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteEventController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				160D67A6263B371D00ADE23D /* EventController.swift */,
+				16B567E1263BBE2C0069E993 /* FavoriteEventController.swift */,
 			);
 			path = ModelControllers;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 			files = (
 				160D679B263B1DC300ADE23D /* EventListTableViewController.swift in Sources */,
 				160D677C263B13AB00ADE23D /* AppDelegate.swift in Sources */,
+				16B567E2263BBE2C0069E993 /* FavoriteEventController.swift in Sources */,
 				16B567DF263BB3510069E993 /* ExtensionHelper.swift in Sources */,
 				160D679E263B1E0400ADE23D /* EventDetailViewController.swift in Sources */,
 				160D67A1263B1E8300ADE23D /* EventTableViewCell.swift in Sources */,

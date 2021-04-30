@@ -8,14 +8,13 @@
 import UIKit
 
 class EventDetailViewController: UIViewController {
-
+    
     // MARK: - Outlets
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var favoriteImageView: UIImageView!
     @IBOutlet weak var eventImageView: UIImageView!
     @IBOutlet weak var dateAndTimeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var detailTextView: UITextView!
     
     // MARK: - Properties
     var event: Event?
@@ -35,7 +34,14 @@ class EventDetailViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func favoriteButttonTapped(_ sender: Any) {
-    
+        guard let event = event else {return}
+        if FavoriteEventController.shared.favoriteEvents.contains(event) {
+            favoriteImageView.image = UIImage(systemName: "heart")
+            FavoriteEventController.shared.deleteFavoriteEvents(event)
+        } else {
+            favoriteImageView.image = UIImage(systemName: "heart.fill")
+            FavoriteEventController.shared.addFavoriteEvents(event)
+        }
     }
     
     // MARK: - Helper Fuctions
@@ -44,11 +50,14 @@ class EventDetailViewController: UIViewController {
         titleLabel.text = event.title
         locationLabel.text = event.venue.location
         let eventDate = event.date.stringDateToDate()
-
         dateAndTimeLabel.text = eventDate.dateToString(format: .fullWithTime)
         updateImageFor(event: event)
+        if FavoriteEventController.shared.favoriteEvents.contains(event) {
+            favoriteImageView.image = UIImage(systemName: "heart.fill")
+        } else {
+            favoriteImageView.image = UIImage(systemName: "heart")
+        }
     }
-    
     
     func updateImageFor(event: Event) {
         guard let imageURL = event.performers.first?.image else {return}
@@ -57,9 +66,6 @@ class EventDetailViewController: UIViewController {
             case .success(let eventImage):
                 DispatchQueue.main.async {
                     self?.eventImageView.image = eventImage
-//                    self?.eventImageView.contentMode = .scaleToFill
-//                    self?.eventImageView.clipsToBounds = true
-//                    self?.eventImageView.layer.cornerRadius = 10
                 }
             case .failure(let error):
                 print("\n===================\(error.localizedDescription)======================IN \(#function)\n")

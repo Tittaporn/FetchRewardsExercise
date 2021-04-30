@@ -23,24 +23,21 @@ class EventListTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        events = FavoriteEventController.shared.favoriteEvents
         tableView.reloadData()
     }
-
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("events.count :: \(events.count)")
         return events.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as? EventTableViewCell else {return UITableViewCell()}
         let event = events[indexPath.row]
         cell.event = event
-       
-
         return cell
     }
-    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -60,13 +57,16 @@ extension EventListTableViewController: UISearchBarDelegate {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let events):
-                self?.events = events
-                self?.tableView.reloadData()
+                    self?.events = events
+                    self?.tableView.reloadData()
                 case .failure(let error):
-              //  print(error.localizedDescription)
                     print("\n===================\(error.localizedDescription))======================IN \(#function)\n")
                 }
             }
         }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        events = FavoriteEventController.shared.favoriteEvents
     }
 }

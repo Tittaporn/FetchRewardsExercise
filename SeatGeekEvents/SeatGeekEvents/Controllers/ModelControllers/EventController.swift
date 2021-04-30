@@ -10,13 +10,13 @@ import UIKit
 class EventController {
     
     // MARK: - URL Properties
-static let baseURL = URL(string: "https://api.seatgeek.com/2")
+    static let baseURL = URL(string: "https://api.seatgeek.com/2")
     static let eventsConponent = "events"
     static let clientId = "client_id"
     static let clientIdValue = "MjE4MTM2NjV8MTYxOTcxNzgxMC4yMTUyMTM1"
     static let searchEventKey = "q"
     
-   // MARK: - FetchEvents
+    // MARK: - FetchEvents
     static func fetchEvents(searchTerm: String, completion: @escaping (Result<[Event],EventError>) -> Void) {
         guard let baseURL = baseURL else {return completion(.failure(.invalidURL))}
         let eventsURL = baseURL.appendingPathComponent(eventsConponent)
@@ -47,7 +47,7 @@ static let baseURL = URL(string: "https://api.seatgeek.com/2")
             }
         }.resume()
     }
-
+    
     // MARK: - FetchImage
     static func fetchImage(with eventImageURL: URL, completion: @escaping (Result<UIImage,EventError>) -> Void) {
         URLSession.shared.dataTask(with: eventImageURL) { (data, response, error) in
@@ -65,25 +65,3 @@ static let baseURL = URL(string: "https://api.seatgeek.com/2")
         }.resume()
     }
 }
-
-/*
- SeatGeekEvents :
-Client ID:    MjE4MTM2NjV8MTYxOTcxNzgxMC4yMTUyMTM1
- Your app secret is "4210ac4ece05bce6fe5dcb11b607230e6e182026c7bdb0a7a3cfce28601bd320" - copy now as it can't be retrieved later.
- 
- 
- 
- Query String
-
- curl https://api.seatgeek.com/2/events?client_id=MYCLIENTID
- curl https://api.seatgeek.com/2/events?client_id=MYCLIENTID&client_secret=MYCLIENTSECRET
-             
- 
- //FetchEventsBySearchTerm
- https://api.seatgeek.com/2/events?client_id=MjE4MTM2NjV8MTYxOTcxNzgxMC4yMTUyMTM1&q=boston+celtics
- https://api.seatgeek.com/2/events?client_id=MjE4MTM2NjV8MTYxOTcxNzgxMC4yMTUyMTM1&q=football
- 
- //FetchEventById
- https://api.seatgeek.com/2/events?client_id=MjE4MTM2NjV8MTYxOTcxNzgxMC4yMTUyMTM1&id=5381863
-
- */
