@@ -51,7 +51,8 @@ class EventListTableViewController: UITableViewController {
 }
 
 extension EventListTableViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard let eventSearchTerm = searchBar.text else {return}
         EventController.fetchEvents(searchTerm: eventSearchTerm) { [weak self](result) in
             DispatchQueue.main.async {
@@ -67,6 +68,9 @@ extension EventListTableViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
         events = FavoriteEventController.shared.favoriteEvents
+        tableView.reloadData()
     }
 }
