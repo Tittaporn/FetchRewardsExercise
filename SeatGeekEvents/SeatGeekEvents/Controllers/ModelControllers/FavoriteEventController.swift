@@ -21,6 +21,7 @@ class FavoriteEventController {
         favoriteEvents.remove(at: index)
         saveToPersistence()
     }
+    
 }
 
 extension FavoriteEventController {
@@ -48,8 +49,8 @@ extension FavoriteEventController {
     func loadFromPersistance() {
         do {
             let data = try Data(contentsOf: createFileForPersistence())
-            let events = try JSONDecoder().decode(Events.self, from: data)
-            favoriteEvents = events.events
+            let events = try JSONDecoder().decode([Event].self, from: data)
+            favoriteEvents = events
             print("\n===================SUCCESFULLY! Loaded Favorite event form Persistance store !! \(favoriteEvents.count) IN\(#function) ======================\n")
         } catch {
             print(error)

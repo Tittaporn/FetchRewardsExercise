@@ -23,6 +23,7 @@ class EventListTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        FavoriteEventController.shared.loadFromPersistance()
         events = FavoriteEventController.shared.favoriteEvents
         tableView.reloadData()
     }
@@ -54,7 +55,7 @@ extension EventListTableViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard let eventSearchTerm = searchBar.text else {return}
-        EventController.fetchEvents(searchTerm: eventSearchTerm) { [weak self](result) in
+        EventController.fetchEvents(searchTerm: eventSearchTerm) { [weak self] (result) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let events):
